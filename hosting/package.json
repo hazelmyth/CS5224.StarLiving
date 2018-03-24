@@ -1,0 +1,21 @@
+{
+  "name": "hosting",
+  "version": "1.0.0",
+  "description": "hosting and back end api for cs5224 clouding computing project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cloud",
+    "hosting",
+    "cs5224"
+  ],
+  "author": "nobody",
+  "license": "ISC",
+  "dependencies": {
+    "cf-deployment-tracker-client": "^0.1.4",
+    "express": "^4.16.3",
+    "ibm_db": "^2.2.1"
+  }
+}
