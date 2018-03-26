@@ -1,83 +1,61 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import BookItem from './BookItem.js';
-import AddItem from './AddItem.js';
+import HdbBlock from './HdbBlock.js';
+import SearchPanel from './SearchPanel.js';
 
-const books1 = [{ name: "Red and black", price: 34 }, { name: "The great gitsbay", price: 33 }];
-localStorage.setItem('books', JSON.stringify(books1));
+import hdbBlocksData from './data';
+
+localStorage.setItem('hdbBlocks', JSON.stringify(hdbBlocksData));
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: JSON.parse(localStorage.getItem('books'))
+      hdbBooks: JSON.parse(localStorage.getItem('hdbBlocks'))
     };
-
-    this.onDelete = this.onDelete.bind(this);
-    this.onAdd = this.onAdd.bind(this);
-    this.onEditSave = this.onEditSave.bind(this);
   }
   componentWillMount() {
-    this.getBooks();
   }
   componentDidMount() {
-    fetch('/api')
-    .then(res => res.json())
-    .then(j => this.setState({
-      message:j.message
-    }));
-  }
-  getBooks() {
-    return this.state.books;
-  }
-  onAdd(name, price) {
-    this.setState({
-      books: [...this.state.books, { name, price }]
-    })
-
-  }
-  onDelete(name) {
-    const books = this.getBooks().filter(b => b.name !== name);
-    this.setState({ books });
-  }
-  onEditSave(name, price, originalName) {
-    let books = this.getBooks();
-    this.setState(
-      {
-        books: books.map(b => {
-          if (b.name === originalName) {
-            b.name = name;
-            b.price = price;
-          }
-          return b;
-        })
-      }
-    );
+    // fetch('/api')
+    //   .then(res => res.json())
+    //   .then(j => this.setState({
+    //     message: j.message
+    //   }));
   }
 
   render() {
     return (
       <div className="App">
-        <AddItem
-          onAdd={this.onAdd}
-        />
-        <hr />
-        <h1>Books List</h1>
-        <h2>{this.state.message}</h2>
-        <div>
-          {
-            this.state.books.map(b => {
-              return (
-                <BookItem
-                  key={b.name}
-                  {...b}
-                  onDelete={this.onDelete}
-                  onEditSave={this.onEditSave}
-                />
-              );
-            })
-          }
+        <h1>Swee Home Locator</h1>
+        <div className="container">
+          <div className="row">
+            <div className="col-md-4">
+              <SearchPanel></SearchPanel>
+            </div>
+            <div className="col-md-8">
+              {
+                this.state.hdbBooks.map(b => {
+                  return (
+                    <HdbBlock key={b.postalCode}
+                      block={b.block}
+                      streetName={b.streetName}
+                      town={b.town}
+                      postalCode={b.postalCode}
+                      rank={b.rank}
+                      score={b.score}
+                      mrtDistance={b.mrtDistance}
+                      foodDistance={b.foodDistance}
+                      clinicDistance={b.clinicDistance}
+                      superMarketDistance={b.superMarketDistance}
+                    >
+                    </HdbBlock>
+                  );
+                })
+              }
+            </div>
+          </div>
         </div>
       </div>
     );
