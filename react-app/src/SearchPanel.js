@@ -25,6 +25,7 @@ class SearchPanel extends Component {
     handleClinicChange = (event, index, value) => this.setState({ clinicWeight: value });
     onSubmit = (event) => {
         event.preventDefault();
+        this.props.onSearch(this.state.mrtWeight, this.state.marketWeight, this.state.foodWeight, this.state.clinicWeight);
         console.log('check state', this.state);
     }
     render() {

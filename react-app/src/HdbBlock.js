@@ -8,13 +8,19 @@ class HdbBlock extends Component {
         const { block, streetName, town, postalCode,
             rank, score, mrtDistance, superMarketDistance,
             foodDistance, clinicDistance } = this.props;
+        const mapLink = `http://www.google.com/maps/search/?api=1&query=${postalCode}`
         return (
             <div className="hdb_block border mb-3 row">
                 <div className="border-right col-md-2">
-                    <span className="text-big">#{rank}</span>
+                    <div className="text-small text-left">#{rank}</div>
+                    <div className="score text-big">{score}</div>
                 </div>
-                <div className="text-success col-md-8">
-                    <div className="mt-2 mb-1 text-medium">Block {block}, {streetName}, {postalCode}</div>
+                <div className="text-success col-md-10">
+                    <div className="mt-2 mb-1 text-medium">
+                        <a target="_blank" href={mapLink}>
+                            Block {block}, {streetName}, {postalCode}
+                        </a>
+                    </div>
                     <div className="text-small mb-1">
                         <span>MRT: {mrtDistance}m</span>
                         <span className="ml-2">Supermarket: {superMarketDistance}m</span>
@@ -22,9 +28,8 @@ class HdbBlock extends Component {
                         <span className="ml-2">Clinic: {clinicDistance}m</span>
                     </div>
                 </div>
-                <div className="border-left col-md-2">
-                    <span className="text-big">{score}</span>
-                </div>
+                {/* <div className="border-left col-md-2">
+                </div> */}
             </div>
 
         );
