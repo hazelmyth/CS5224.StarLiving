@@ -7,7 +7,7 @@ class HdbBlock extends Component {
     render() {
         const { block, streetName, town, postalCode,
             rank, score, mrtDistance, superMarketDistance,
-            foodDistance, clinicDistance } = this.props;
+            foodDistance, clinicDistance, dengueDistance } = this.props;
         const mapLink = `http://www.google.com/maps/search/?api=1&query=${postalCode}`
         return (
             <div className="hdb_block border mb-3 row">
@@ -22,10 +22,11 @@ class HdbBlock extends Component {
                         </a>
                     </div>
                     <div className="text-small mb-1">
-                        <span>MRT: {mrtDistance}m</span>
-                        <span className="ml-2">Supermarket: {superMarketDistance}m</span>
-                        <span className="ml-2">Food court: {foodDistance}m</span>
-                        <span className="ml-2">Clinic: {clinicDistance}m</span>
+                        <span>MRT: {mrtDistance === -1 ? "--" : Math.ceil(mrtDistance) + "m"}</span>
+                        <span className="ml-2">Supermarket: {superMarketDistance === -1 ? "--" : Math.ceil(superMarketDistance) + "m"}</span>
+                        <span className="ml-2">Food court: {foodDistance === -1 ? "--" : Math.ceil(foodDistance) + "m"}</span>
+                        <span className="ml-2">Clinic: {clinicDistance === -1 ? "--" : Math.ceil(clinicDistance) + "m"}</span>
+                        <span className="ml-2">Dengue: {dengueDistance === -1 ? "--" : Math.ceil(dengueDistance) + "m"}</span>
                     </div>
                 </div>
                 {/* <div className="border-left col-md-2">

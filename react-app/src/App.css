@@ -32,7 +32,7 @@
 }
 
 .weight-dropdown{
-  width:150px;
+  width:250px;
 }
 .btn-width{
   width:60%;
@@ -44,6 +44,10 @@
   background-color: rgb(19, 18, 18);
   color: white;
   height: 50px;
+}
+.block-list{
+  max-height: 650px;
+  overflow-y:scroll;
 }
 
 @keyframes App-logo-spin {
