@@ -1,21 +1,21 @@
 {
-  "name": "hosting",
-  "version": "1.0.0",
-  "description": "hosting and back end api for cs5224 clouding computing project",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "engines": {
+    "node": "^4"
   },
-  "keywords": [
-    "cloud",
-    "hosting",
-    "cs5224"
-  ],
-  "author": "nobody",
-  "license": "ISC",
+  "name": "dashdbnodesample",
+  "version": "0.0.1",
+  "description": "A sample node app for connecting to dashDB service on Bluemix",
   "dependencies": {
-    "cf-deployment-tracker-client": "^0.1.4",
-    "express": "^4.16.3",
-    "ibm_db": "^2.2.1"
+    "cf-deployment-tracker-client": "^0.0.8",
+    "express": "^3.5.3",
+    "ibm_db": "^2.0.0",
+    "jade": "^1.11.0"
+  },
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IBM-Bluemix/dashdb-nodejs-helloworld"
   }
 }

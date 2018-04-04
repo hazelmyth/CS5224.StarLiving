@@ -1,24 +1,31 @@
 exports.listSysTables = function (ibmdb, connString) {
 	return function (req, res) {
 
-
 		ibmdb.open(connString, function (err, conn) {
-			console.log("Inspect query params", req.query);
-			let queryParams = [req.query.mrt, req.query.market, , req.query.food, , req.query.clinic, 10];
 			if (err) {
-				res.json({ err: "error occurred " + err.message });
+				res.setHeader('Content-Type', 'application/json');
+				res.send(JSON.stringify({err:"error occurred " + err.message}));
 			}
 			else {
-				let q = `SELECT FIRST_NAME, LAST_NAME, EMAIL, WORK_PHONE from GOSALESHR.employee FETCH FIRST 10 ROWS ONLY`
-				conn.query(q, queryParams, function (err, tables, moreResultSets) {
 
+				var q = "SELECT * FROM DASH14989.HDB_Summary";
+				conn.query(q, function (err, tables, moreResultSets) {
 
+					var result = {rows:tables};
 					if (!err) {
-						res.json({ result: "Query result " + JSON.stringify(tables) });
+						res.setHeader('Content-Type', 'application/json');
+						res.send(JSON.stringify(tables));
+						// res.render('tablelist', {
+						// 	"tablelist" : tables,
+						// 	"tableName" : "10 rows from the GOSALESHR.EMPLOYEE table",
+						// 	"message": "Congratulations. Your connection to dashDB is successful."
+
+						//  });
 
 
 					} else {
-						res.json({ err: "error occurred " + err.message });
+						res.setHeader('Content-Type', 'application/json');
+						res.send(JSON.stringify({err:"error occurred " + err.message}));
 					}
 
 					/*
