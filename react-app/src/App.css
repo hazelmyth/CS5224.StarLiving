@@ -28,11 +28,15 @@
   font-size: 20px;
 }
 .text-small{
-  font-size: 11px;
+  font-size: 10px;
+  font-family: cursive;
 }
 
 .weight-dropdown{
   width:250px;
+}
+.weight-dropdown-main{
+  width:500px;
 }
 .btn-width{
   width:60%;

@@ -1,39 +1,21 @@
 const hdbBlocksData = [
     {
-        block: "309", streetName: "ANG MO KIO AVE 1", town: "ANG MO KIO",
-        postalCode: "542259", rank: 1, score: 89, mrtDistance: 250,
-        foodDistance: 390, clinicDistance: 450, superMarketDistance: 300
-        , mrtScore: 7.8, foodScore: 5.6, clinicScore: 4, marketScore: 7.2
+        id: "0", Block: "309", Street_Name: "ANG MO KIO AVE 1", Town: "ANG MO KIO",
+        Postal_Code: "562309", Near_Supermarkets: "[[23, 275.669]]", Near_Dengues: "[]",
+        Near_Mrts: "[[112, 722.131]]", Near_Foodcourts: "[[49, 321.817]]", Near_Clinics: "[[1306, 240.841]]",
+        Supermarket_Score: 3.649, Mrt_Score: 0.747, Foodcourt_Score: 3.792, Clinic_Score: 5.452, Dengue_Score: 10
     },
     {
-        block: "209", streetName: "BEDOK RESERVOIR RD", town: "BEDOK",
-        postalCode: "562605", rank: 2, score: 79, mrtDistance: 200,
-        foodDistance: 280, clinicDistance: 500, superMarketDistance: 600
-        , mrtScore: 8.8, foodScore: 8.2, clinicScore: 2, marketScore: 1.2
+        id: "119", Block: "29", Street_Name: "NEW UPP CHANGI RD", Town: "BEDOK",
+        Postal_Code: "64029", Near_Supermarkets: "[[303, 448.619]]", Near_Dengues: "[]",
+        Near_Mrts: "[[26, 706.654]]", Near_Foodcourts: "[[36, 389.024]]", Near_Clinics: "[[1510, 326.258]]",
+        Supermarket_Score: 2.67, Mrt_Score: 0.789, Foodcourt_Score: 4.053, Clinic_Score: 6.159, Dengue_Score: 10
     },
     {
-        block: "309", streetName: "ANG MO KIO AVE 1", town: "ANG MO KIO",
-        postalCode: "562306", rank: 3, score: 77, mrtDistance: 210,
-        foodDistance: 320, clinicDistance: 150, superMarketDistance: 300
-        , mrtScore: 8.0, foodScore: 6.6, clinicScore: 7.2, marketScore: 5.0
-    },
-    {
-        block: "309", streetName: "ANG MO KIO AVE 1", town: "ANG MO KIO",
-        postalCode: "562307", rank: 4, score: 69, mrtDistance: 800,
-        foodDistance: 90, clinicDistance: 40, superMarketDistance: 100
-        , mrtScore: 1.8, foodScore: 9.6, clinicScore: 10, marketScore: 9.2
-    },
-    {
-        block: "309", streetName: "ANG MO KIO AVE 1", town: "ANG MO KIO",
-        postalCode: "562308", rank: 5, score: 65, mrtDistance: 900,
-        foodDistance: 190, clinicDistance: 450, superMarketDistance: 300
-        , mrtScore: 0.8, foodScore: 6.6, clinicScore: 5.0, marketScore: 7.2
-    },
-    {
-        block: "309", streetName: "ANG MO KIO AVE 1", town: "ANG MO KIO",
-        postalCode: "562309", rank: 6, score: 50, mrtDistance: 30,
-        foodDistance: 290, clinicDistance: 550, superMarketDistance: 300
-        , mrtScore: 10, foodScore: 5.6, clinicScore: 3, marketScore: 7.2
+        id: "120", Block: "30", Street_Name: "NEW UPP CHANGI RD", Town: "BEDOK",
+        Postal_Code: "461030", Near_Supermarkets: "[[303, 410.584]]", Near_Dengues: "[]",
+        Near_Mrts: "[[26, 717.609]]", Near_Foodcourts: "[[36, 344.915]]", Near_Clinics: "[[1510, 330.693]]",
+        Supermarket_Score: 2.6, Mrt_Score: 0.759, Foodcourt_Score: 3.958, Clinic_Score: 5.893, Dengue_Score: 10
     },
 ];
 export default hdbBlocksData;

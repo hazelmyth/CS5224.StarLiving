@@ -35,7 +35,7 @@ class SearchPanel extends Component {
         return (
 
             <form className="border" onSubmit={this.onSubmit}>
-                <p>Degree of Importance</p>
+                <p>Credits of Importance</p>
                 <div className="col-md-6">MRT Station:</div>
                 <div className="col-md-6">
                     <MuiThemeProvider>

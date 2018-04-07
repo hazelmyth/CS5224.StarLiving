@@ -13,7 +13,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //------------------------------------------------------------------------------
-var getMrt = require('nearest-mrt');
 var express = require('express');
 var routes = require('./routes');
 var http = require('http');

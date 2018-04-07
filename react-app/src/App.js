@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MenuItem from 'material-ui/MenuItem';
 import logo from './logo.svg';
 import './App.css';
 import HdbBlock from './HdbBlock.js';
@@ -13,31 +16,54 @@ class App extends Component {
     super(props);
     this.state = {
       hdbBlocks: [],// JSON.parse(localStorage.getItem('hdbBlocks')),
-      filteredHdbs: []
+      filteredHdbs: [],
+      indexes: {},
+      towns: ['--'],
+      town: '--'
     };
     this.onSearch = this.onSearch.bind(this);
+    this.handleTownChange = this.handleTownChange.bind(this);
   }
   componentDidMount() {
     fetch(`/database`)
       .then(res => res.json())
       .then(resJson => {
         //console.log('get hdb blocks succeeds', resJson);
+        var towns = ['--'];
+        resJson.forEach(function (b) {
+          if (b.Town && !towns.find(t => t.toLowerCase() === b.Town.toLowerCase())) {
+            towns.push(b.Town);
+          }
+        });
         this.setState({
-          hdbBlocks: resJson
+          hdbBlocks:resJson,
+          towns: towns.sort()
         });
         this.onSearch(10, 10, 10, 10, 10);
       });
-
+    // var blocks = JSON.parse(localStorage.getItem('hdbBlocks'));
+    // var towns = ['--'];
+    // blocks.forEach(function (b) {
+    //   if (b.Town && towns.findIndex((val) => val.toLowerCase() === b.Town.toLowerCase()) < 0) {
+    //     towns.push(b.Town);
+    //   }
+    // });
+    // this.setState({
+    //   hdbBlocks: blocks,
+    //   towns: towns.sort()
+    // });
+    // this.onSearch(10, 10, 10, 10, 10);
   }
-  onSearch(mrtIndex, marketIndex, foodIndex, clinicIndex, dengueIndex) {
-    console.log('log to check hdb blocks', this.state.hdbBlocks.length);
+  filterBlocks(mrtIndex, marketIndex, foodIndex, clinicIndex, dengueIndex, town) {
     this.setState({
-      filteredHdbs: this.state.hdbBlocks.map(b => {
-        var s = (b.Mrt_Score * mrtIndex + b.Supermarket_Score * marketIndex + b.Foodcourt_Score * foodIndex
-          + b.Clinic_Score * clinicIndex + b.Dengue_Score * dengueIndex) / 5;
-        b.score = Math.round(s * 10) / 10;
-        return b;
-      })
+      filteredHdbs: this.state.hdbBlocks
+        .filter(b => town === '--' || b.Town.toLowerCase() === town.toLowerCase())
+        .map(b => {
+          var s = (b.Mrt_Score * mrtIndex + b.Supermarket_Score * marketIndex + b.Foodcourt_Score * foodIndex
+            + b.Clinic_Score * clinicIndex + b.Dengue_Score * dengueIndex) / 5;
+          b.score = Math.round(s * 10) / 10;
+          return b;
+        })
         .sort((a, b) => -a.score + b.score)
         .slice(0, 50)
         .map(b => {
@@ -45,7 +71,7 @@ class App extends Component {
           b.mrtDistance = mrtArray.length > 0 ? mrtArray[0][1] : -1;
 
           var foodArray = JSON.parse(b.Near_Foodcourts);
-          b.foodDistance = foodArray.length > 0 ? mrtArray[0][1] : -1;
+          b.foodDistance = foodArray.length > 0 ? foodArray[0][1] : -1;
 
           var clinicArray = JSON.parse(b.Near_Clinics);
           b.clinicDistance = clinicArray.length > 0 ? clinicArray[0][1] : -1;
@@ -60,12 +86,28 @@ class App extends Component {
 
     });
   }
+  onSearch(mrtIndex, marketIndex, foodIndex, clinicIndex, dengueIndex) {
+    console.log('log to check hdb blocks', this.state.hdbBlocks.length);
+    this.setState({
+      indexes: { mrtIndex, marketIndex, foodIndex, clinicIndex, dengueIndex }
+    });
+    this.filterBlocks(mrtIndex, marketIndex, foodIndex, clinicIndex, dengueIndex, this.state.town);
+  }
+
+  handleTownChange(event, index, value) {
+    this.setState({
+      town: value
+    });
+    var { mrtIndex, marketIndex, foodIndex, clinicIndex, dengueIndex } = this.state.indexes;
+    this.filterBlocks(mrtIndex, marketIndex, foodIndex, clinicIndex, dengueIndex, value);
+  }
 
   render() {
     return (
       <div className="App">
         <div className="banner text-left" >
-          <span className="text-medium ml-2 mt-4"> Sweet Home Locator</span>
+          <span className="text-medium ml-2 mt-4"> Sweet Home</span>
+          <span className="text-small ml-2 mt-4">Hit your sweet spot</span>
         </div>
         <div className="container mt-2">
           <div className="row">
@@ -76,6 +118,14 @@ class App extends Component {
               </SearchPanel>
             </div>
             <div className="col-md-8 block-list">
+              <div>
+                <MuiThemeProvider>
+                  <DropDownMenu className="weight-dropdown-main" maxHeight={300} autoWidth={false}
+                    value={this.state.town} onChange={this.handleTownChange}>
+                    {this.state.towns.map(t => <MenuItem value={t} key={t} primaryText={`${t}`} />)}
+                  </DropDownMenu>
+                </MuiThemeProvider>
+              </div>
               {
                 this.state.filteredHdbs.map((b, i) => {
                   return (
